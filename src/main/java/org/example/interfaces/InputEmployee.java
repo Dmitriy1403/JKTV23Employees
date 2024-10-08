@@ -3,9 +3,7 @@ package org.example.interfaces;
 import org.example.Input;
 import org.example.model.Address;
 import org.example.model.Employee;
-import org.example.interfaces.EmployeeProvider;
 import org.example.model.Person;
-import org.example.EmployeeService;
 import org.example.App;
 
 public class InputEmployee  implements  EmployeeProvider{
@@ -52,6 +50,30 @@ public class InputEmployee  implements  EmployeeProvider{
         return employee;
     }
 
+    @Override
+    public void listEmployees(){
+
+        for (int i=0;i<App.employees.length;i++){
+            Employee employee = App.employees[i];
+            if(employee !=null){
+                System.out.printf("%d. %s %s. %s. %s%n",
+                        i+1,
+                        employee.getPerson().getFirstname(),
+                        employee.getPerson().getLastname(),
+                        employee.getPosition(),
+                        employee.getPosition()
+
+
+
+
+                );
+
+
+
+            }
+        }
+
+    }
 
 
 

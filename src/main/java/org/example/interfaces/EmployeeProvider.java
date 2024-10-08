@@ -11,5 +11,5 @@ public interface EmployeeProvider {
     Employee addEmployee(Input input);
 
 
-
+    void listEmployees();
 }

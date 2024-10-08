@@ -1,4 +1,5 @@
 package org.example;
+
 import org.example.interfaces.InputEmployee;
 import org.example.model.Address;
 import org.example.model.Employee;
@@ -70,9 +71,10 @@ public class AppTest {
 
     }
 
-//    @Test
+
+    @Test
     public void testRunTask1(){
-        when(mockInput.nextLine()).thenReturn("1","0");
+        when(mockInput.nextLine()).thenReturn("1", "2","0");
         InputEmployee inputEmployeeMock = mock(InputEmployee.class);
         when(inputEmployeeMock.addEmployee(mockInput)).thenReturn(
                 new Employee("Director",
@@ -94,12 +96,23 @@ public class AppTest {
         App app = new App(mockInput,new EmployeeService(inputEmployeeMock));
         app.run();
         String output = mockOut.toString();
+        System.setOut(new PrintStream(defaultOut));
+        System.out.println(mockOut.toString());
+
 
         String expectedOutFragment1 = "User added!!";
         String expectedOutFragment2 = "Good bye!!";
         assertTrue(output.contains(expectedOutFragment1));
         assertTrue(output.contains(expectedOutFragment2));
+        String expectedOutFragment3 = "Список Сотрудников";
 
+        assertTrue(output.contains(expectedOutFragment3));
+
+    }
+
+    void testRunPrintListEmployees(){
+
+        InputEmployee inputEmployee = mock(InputEmployee.class);
     }
 
     private void assertTrue(boolean goodBye) {
