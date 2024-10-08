@@ -1,7 +1,6 @@
 package org.example;
-import org.example.interfaces.EmployeeProvider;
+import org.example.interfaces.*;
 import org.example.interfaces.Input;
-import org.example.interfaces.InputEmployee;
 import org.example.tools.ConsoleInput;
 
 
@@ -18,8 +17,9 @@ public class Main {
 
         EmployeeProvider employeeProvider = new InputEmployee();
         EmployeeService employeeService = new EmployeeService(employeeProvider);
+        EmployeeRepository employeeRepository =  new EmployeeFileService();
 
-        App app = new App((org.example.Input) input,employeeService);
+        App app = new App((org.example.Input) input,employeeService,employeeRepository);
 
 
         // Press Alt+Enter with your caret at the highlighted text to see how

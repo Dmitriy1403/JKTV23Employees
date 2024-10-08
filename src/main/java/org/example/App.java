@@ -1,17 +1,23 @@
 package org.example;
 
+import org.example.interfaces.EmployeeRepository;
 import org.example.model.Employee;
 import org.example.EmployeeService;
 
 public class App {
 
     public static Employee[] employees = new Employee[100];
+
     private final EmployeeService employeeService;
     private final Input input;
+    private final EmployeeRepository employeeRepositiry;
 
-    public App(Input input,EmployeeService employeeService) {
+    public App(Input input, EmployeeService employeeService, EmployeeRepository employeeRepository) {
         this.input = input;
         this.employeeService = employeeService;
+        this.employeeRepositiry = employeeRepository;
+        employees = new Employee[]{employeeRepository.loadEmployees()};
+
 
     }
 
@@ -38,7 +44,7 @@ public class App {
                 case 1:
 
                     System.out.println("Add Employees");
-                    employeeService.createEmployee((org.example.interfaces.Input) input);
+                    employeeService.createEmployee((org.example.interfaces.Input) input,employeeRepositiry);
                     System.out.println();
 
                     break;

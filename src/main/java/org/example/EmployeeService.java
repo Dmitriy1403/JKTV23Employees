@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.interfaces.EmployeeProvider;
+import org.example.interfaces.EmployeeRepository;
 import org.example.interfaces.Input;
 import org.example.model.Employee;
 
@@ -16,7 +17,7 @@ public class EmployeeService {
 
     }
 
-    public void createEmployee(Input input){
+    public boolean createEmployee(Input input, EmployeeRepository employeeRepository){
 
         Employee employee = employeeProvider.addEmployee((org.example.Input) input);
 
@@ -24,18 +25,16 @@ public class EmployeeService {
 
         App.employees[0] = employee;
         for(int i=0;i<App.employees.length;i++){
-            if(i==0 && App.employees[i]==null){
+            if(App.employees[i]==null){
                 App.employees[i]=employee;
-                break;
+                employeeRepository.saveEmployee(App.employees);
+                return true;
 
-            }else if (i>0 && App.employees[i]==null){
-                App.employees[i] = employee;
-                break;
             }
-
         }
 
-       }
+        return false;
+    }
 
 
 

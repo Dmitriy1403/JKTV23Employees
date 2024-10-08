@@ -1,10 +1,13 @@
 package org.example;
 
+import org.example.interfaces.EmployeeFileService;
+import org.example.interfaces.EmployeeRepository;
 import org.example.interfaces.InputEmployee;
 import org.example.model.Address;
 import org.example.model.Employee;
 import org.example.model.Person;
 import org.example.tools.ConsoleInput;
+
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,7 +62,12 @@ public class AppTest {
 //        ByteArrayOutputStream out = new ByteArrayOutputStream();
 //        System.setOut(new PrintStream(out));
         when(mockInput.nextLine()).thenReturn("0");
-        App app = new App(mockInput,new EmployeeService(new InputEmployee()));
+        App app = new App(mockInput, new EmployeeService(new InputEmployee()),new EmployeeFileService() {
+            @Override
+            public boolean saveEmployee(Employee[] employees) {
+                return false;
+            }
+        });
         app.run();
         String actualOut = mockOut.toString();
         System.setOut(new PrintStream(defaultOut));
@@ -93,7 +101,7 @@ public class AppTest {
 
 
 
-        App app = new App(mockInput,new EmployeeService(inputEmployeeMock));
+        App app = new App(mockInput,new EmployeeService(inputEmployeeMock),new EmployeeFileService());
         app.run();
         String output = mockOut.toString();
         System.setOut(new PrintStream(defaultOut));
